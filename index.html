@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: url("images/Bojack.png") center/cover no-repeat fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        backdrop-filter: brightness(0.6);
+        color: white;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        width: 90%;
+        max-width: 600px;
+      }
+
+      button.audio-btn {
+        padding: 15px;
+        font-size: 1rem;
+        border: none;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: background 0.3s;
+      }
+
+      button.audio-btn:hover {
+        background: rgba(255, 255, 255, 0.35);
+      }
+
+      .player {
+        margin-top: 30px;
+        width: 90%;
+        max-width: 600px;
+      }
+
+      audio {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🎉 Happy Birthday! 🎉</h1>
+
+    <div class="grid">
+      <button class="audio-btn" data-audio="recordings/audio1.mp3">
+        Messaggio 1
+      </button>
+      <button class="audio-btn" data-audio="recordings/audio2.mp3">
+        Messaggio 2
+      </button>
+      <button class="audio-btn" data-audio="recordings/audio3.mp3">
+        Messaggio 3
+      </button>
+      <button class="audio-btn" data-audio="recordings/audio4.mp3">
+        Messaggio 4
+      </button>
+    </div>
+
+    <div class="player">
+      <audio id="player" controls></audio>
+    </div>
+
+    <script>
+      const buttons = document.querySelectorAll(".audio-btn");
+      const player = document.getElementById("player");
+
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const src = btn.getAttribute("data-audio");
+          player.src = src;
+          player.play();
+        });
+      });
+    </script>
+  </body>
+</html>
