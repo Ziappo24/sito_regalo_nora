@@ -1,153 +1,179 @@
 <!DOCTYPE html>
 <html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: url("images/Bojack.png") center/cover no-repeat fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        backdrop-filter: brightness(0.6);
+        color: white;
+      }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background: url("images/Bojack.png") center/cover no-repeat fixed;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      backdrop-filter: brightness(0.6);
-      color: white;
-    }
+      h1 {
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
 
-    h1 {
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        width: 90%;
+        max-width: 600px;
+      }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 15px;
-      width: 90%;
-      max-width: 600px;
-    }
+      button.audio-btn {
+        padding: 15px;
+        font-size: 1rem;
+        border: none;
+        background: rgba(255, 255, 255, 0.2);
+        color: white;
+        cursor: pointer;
+        border-radius: 10px;
+        transition: background 0.3s;
+      }
 
-    button.audio-btn {
-      padding: 15px;
-      font-size: 1rem;
-      border: none;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      cursor: pointer;
-      border-radius: 10px;
-      transition: background 0.3s;
-    }
+      button.audio-btn:hover {
+        background: rgba(255, 255, 255, 0.35);
+      }
 
-    button.audio-btn:hover {
-      background: rgba(255, 255, 255, 0.35);
-    }
+      .player {
+        margin-top: 30px;
+        width: 90%;
+        max-width: 600px;
+      }
 
-    .player {
-      margin-top: 30px;
-      width: 90%;
-      max-width: 600px;
-    }
+      audio {
+        width: 100%;
+      }
 
-    audio {
-      width: 100%;
-    }
+      /* Overlay immagine */
+      #imgOverlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: none; /* Inizialmente nascosto */
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
 
-/* Overlay immagine */
-#imgOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    display: none; /* Inizialmente nascosto */
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
+      /* Applica gli stili direttamente all'elemento immagine dinamico */
+      #imgOverlay #dynamicImage {
+        max-width: 80%;
+        max-height: 80%;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      }
 
-/* Applica gli stili direttamente all'elemento immagine dinamico */
-#imgOverlay #dynamicImage {
-    max-width: 80%;
-    max-height: 80%;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-}
+      #closeOverlay {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 26px;
+        cursor: pointer;
+        background: #ff4444;
+        padding: 10px 18px;
+        border-radius: 10px;
+        z-index: 10000; /* Assicurati che il pulsante di chiusura sia sopra l'immagine */
+      }
+    </style>
+  </head>
 
-#closeOverlay {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    font-size: 26px;
-    cursor: pointer;
-    background: #ff4444;
-    padding: 10px 18px;
-    border-radius: 10px;
-    z-index: 10000; /* Assicurati che il pulsante di chiusura sia sopra l'immagine */
-}
-  </style>
-</head>
+  <body>
+    <h1>🎉 Happy Birthday! 🎉</h1>
 
-<body>
-  <h1>🎉 Happy Birthday! 🎉</h1>
+    <div class="grid">
+      <button
+        class="audio-btn"
+        data-audio="recordings/Back90.mp3"
+        data-img="images/marina.jpeg"
+      >
+        INTRO-1 S1: "Back in the 90s"
+      </button>
+      <button class="audio-btn" data-audio="recordings/marina1.ogg" data-img="">
+        EP-1 S1: "L'onestà di Marina"
+      </button>
+      <button class="audio-btn" data-audio="recordings/gaia.ogg" data-img="">
+        EP-2 S1: "GAIA???"
+      </button>
+      <button
+        class="audio-btn"
+        data-audio="recordings/elisa.ogg"
+        data-img="images/elisa.jpeg"
+      >
+        EP-3 S1: "Non ti scordar di Elisa"
+      </button>
+      <button class="audio-btn" data-audio="recordings/come_va.mp3" data-img="">
+        EP-4 S1: "Come va?"
+      </button>
+      <button
+        class="audio-btn"
+        data-audio="recordings/colazione.mp3"
+        data-img=""
+      >
+        EP-5 S1: "Quanto è importante la colazione?"
+      </button>
+      <button class="audio-btn" data-audio="recordings/edo.ogg" data-img="">
+        EP-1 S2: "Edward mani di forbice"
+      </button>
+      <button class="audio-btn" data-audio="recordings/sergiu.ogg" data-img="">
+        EP-2 S2: "Sergiuuuuu compagno di avventure"
+      </button>
 
-  <div class="grid">
-    <button class="audio-btn" data-audio="recordings/Back90.mp3" data-img="images/marina.jpeg">
-      INTRO-1 S1: "Back in the 90s"
-    </button>
-    <button class="audio-btn" data-audio="recordings/marina1.ogg" data-img="">
-      EP-1 S1: "L'onestà di Marina"
-    </button>
-    <button class="audio-btn" data-audio="recordings/gaia.ogg" data-img="">
-      EP-2 S1: "GAIA???"
-    </button>
-    <button class="audio-btn" data-audio="recordings/elisa.ogg" data-img="images/elisa.jpeg">
-      EP-3 S1: "Non ti scordar di Elisa"
-    </button>
-    <button class="audio-btn" data-audio="recordings/come_va.mp3" data-img="">
-      EP-4 S1: "Come va?"
-    </button>
-    <button class="audio-btn" data-audio="recordings/colazione.mp3" data-img="">
-      EP-5 S1: "Quanto è importante la colazione?"
-    </button>
-    <button class="audio-btn" data-audio="recordings/edo.ogg" data-img="">
-      EP-1 S2: "Edward mani di forbice"
-    </button>
-    <button class="audio-btn" data-audio="recordings/sergiu.ogg" data-img="">
-      EP-2 S2: "Sergiuuuuu compagno di avventure"
-    </button>
-  
-    <button class="audio-btn" data-audio="recordings/audio.mp3" data-img="images/img.png">
-      EP-3 S2: "Io clicco, e tu?"
-    </button>
-    <button class="audio-btn" data-audio="recordings/lose_yourself.mp3" data-img="images/giorgio.jpeg">
-      EP-4 S2: "Saranno Famosi"
-    </button>
-    <button class="audio-btn" data-audio="recordings/lose_yourself.mp3" data-img="">
-      EP-5 S2: "Questa è la nostra!👩🏻‍❤️‍👩🏼"
-    </button>
-    <button class="audio-btn" data-audio="recordings/lose_yourself.mp3" data-img="">
-      EP-6 S2: "Sgubgulablabab tales 2.0"
-    </button>
-  </div>
-  
-  <div id="imgOverlay">
-    <div id="closeOverlay">CHIUDI ✖</div>
-    <img id="dynamicImage" src="" alt="Immagine Episodio" />
-  </div>
+      <button
+        class="audio-btn"
+        data-audio="recordings/audio.mp3"
+        data-img="images/img.png"
+      >
+        EP-3 S2: "Io clicco, e tu?"
+      </button>
+      <button
+        class="audio-btn"
+        data-audio="recordings/lose_yourself.mp3"
+        data-img="images/giorgio.jpeg"
+      >
+        EP-4 S2: "Saranno Famosi"
+      </button>
+      <button
+        class="audio-btn"
+        data-audio="recordings/francesca.mp3"
+        data-img=""
+      >
+        EP-5 S2: "Questa è la nostra!👩🏻‍❤️‍👩🏼"
+      </button>
+      <button class="audio-btn" data-audio="recordings/gubbo.mp3" data-img="">
+        EP-6 S2: "Sgubgulablabab tales 2.0"
+      </button>
+      <button class="audio-btn" data-audio="recordings/bianca.ogg" data-img="">
+        EP-1 S3: "Biancotty 4L"
+      </button>
+    </div>
 
-  <div class="player">
-    <audio id="player" controls></audio>
-  </div>
+    <div id="imgOverlay">
+      <div id="closeOverlay">CHIUDI ✖</div>
+      <img id="dynamicImage" src="" alt="Immagine Episodio" />
+    </div>
 
-  <script>
-    const buttons = document.querySelectorAll(".audio-btn");
+    <div class="player">
+      <audio id="player" controls></audio>
+    </div>
+
+    <script>
+      const buttons = document.querySelectorAll(".audio-btn");
       const player = document.getElementById("player");
       const imgOverlay = document.getElementById("imgOverlay");
       const closeOverlay = document.getElementById("closeOverlay");
@@ -183,7 +209,6 @@
         // Opzionale: Resetta la sorgente dell'immagine quando l'overlay è chiuso
         dynamicImage.src = "";
       });
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
