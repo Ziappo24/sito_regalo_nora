@@ -58,37 +58,39 @@
       width: 100%;
     }
 
-    /* Overlay immagine */
-    #imgOverlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+/* Overlay immagine */
+#imgOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none; /* Inizialmente nascosto */
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
 
-    #imgOverlay img {
-      max-width: 80%;
-      max-height: 80%;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-    }
+/* Applica gli stili direttamente all'elemento immagine dinamico */
+#imgOverlay #dynamicImage {
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
 
-    #closeOverlay {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      font-size: 26px;
-      cursor: pointer;
-      background: #ff4444;
-      padding: 10px 18px;
-      border-radius: 10px;
-    }
+#closeOverlay {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 26px;
+    cursor: pointer;
+    background: #ff4444;
+    padding: 10px 18px;
+    border-radius: 10px;
+    z-index: 10000; /* Assicurati che il pulsante di chiusura sia sopra l'immagine */
+}
   </style>
 </head>
 
@@ -96,39 +98,45 @@
   <h1>🎉 Happy Birthday! 🎉</h1>
 
   <div class="grid">
-    <button class="audio-btn" data-audio="recordings/Back90.mp3">
+    <button class="audio-btn" data-audio="recordings/Back90.mp3" data-img="">
       INTRO-1 S1: "Back in the 90s"
     </button>
-    <button class="audio-btn" data-audio="recordings/marina1.ogg">
+    <button class="audio-btn" data-audio="recordings/marina1.ogg" data-img="">
       EP-1 S1: "L'onestà di Marina"
     </button>
-    <button class="audio-btn" data-audio="recordings/gaia.ogg">
+    <button class="audio-btn" data-audio="recordings/gaia.ogg" data-img="">
       EP-2 S1: "GAIA???"
     </button>
-    <button class="audio-btn" data-audio="recordings/elisa.ogg">
+    <button class="audio-btn" data-audio="recordings/elisa.ogg" data-img="images/elisa.jpeg">
       EP-3 S1: "Non ti scordar di Elisa"
     </button>
-    <button class="audio-btn" data-audio="recordings/come_va.mp3">
+    <button class="audio-btn" data-audio="recordings/come_va.mp3" data-img="">
       EP-4 S1: "Come va?"
     </button>
-    <button class="audio-btn" data-audio="recordings/colazione.mp3">
+    <button class="audio-btn" data-audio="recordings/colazione.mp3" data-img="">
       EP-5 S1: "Quanto è importante la colazione?"
     </button>
-    <button class="audio-btn" data-audio="recordings/edo.ogg">
+    <button class="audio-btn" data-audio="recordings/edo.ogg" data-img="">
       EP-1 S2: "Edward mani di forbice"
     </button>
-    <button class="audio-btn" data-audio="recordings/sergiu.ogg">
+    <button class="audio-btn" data-audio="recordings/sergiu.ogg" data-img="">
       EP-2 S2: "Sergiuuuuu compagno di avventure"
     </button>
-
-    <button class="audio-btn" id="playBtn" data-audio="recordings/audio.mp3">
+  
+    <button class="audio-btn" data-audio="recordings/audio.mp3" data-img="images/img.png">
       EP-3 S2: "Io clicco, e tu?"
     </button>
-
-    <div id="imgOverlay">
-      <div id="closeOverlay">CHIUDI ✖</div>
-      <img src="images/img.png" alt="Immagine Episodio" />
-    </div>
+    <button class="audio-btn" data-audio="recordings/lose_yourself.mp3" data-img="images/giorgio.jpeg">
+      EP-4 S2: "Saranno Famosi"
+    </button>
+    <button class="audio-btn" data-audio="recordings/lose_yourself.mp3" data-img="">
+      EP-4 S2: "Questa è la nostra!👩🏻‍❤️‍👩🏼"
+    </button>
+  </div>
+  
+  <div id="imgOverlay">
+    <div id="closeOverlay">CHIUDI ✖</div>
+    <img id="dynamicImage" src="" alt="Immagine Episodio" />
   </div>
 
   <div class="player">
@@ -137,33 +145,41 @@
 
   <script>
     const buttons = document.querySelectorAll(".audio-btn");
-    const player = document.getElementById("player");
-    const imgOverlay = document.getElementById("imgOverlay");
-    const closeOverlay = document.getElementById("closeOverlay");
+      const player = document.getElementById("player");
+      const imgOverlay = document.getElementById("imgOverlay");
+      const closeOverlay = document.getElementById("closeOverlay");
+      const dynamicImage = document.getElementById("dynamicImage"); // Nuova variabile per l'immagine
 
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        // 1. Fai partire l'audio (questo vale per TUTTI i bottoni)
-        const src = btn.getAttribute("data-audio");
-        player.src = src;
-        player.play();
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          // 1. Fai partire l'audio
+          const audioSrc = btn.getAttribute("data-audio");
+          player.src = audioSrc;
+          player.play();
 
-        // 2. CONTROLLO SPECIALE:
-        // Se l'ID del bottone cliccato è ESATTAMENTE "playBtn"...
-        if (btn.id === "playBtn") {
-          // ...allora mostra l'immagine
-          imgOverlay.style.display = "flex";
-        } else {
-          // ...altrimenti (per tutti gli altri bottoni) nascondila!
-          imgOverlay.style.display = "none";
-        }
+          // 2. Ottieni il percorso dell'immagine dal bottone
+          const imageSrc = btn.getAttribute("data-img");
+
+          // 3. CONTROLLO SPECIALE:
+          // Se il percorso dell'immagine NON è vuoto...
+          if (imageSrc && imageSrc !== "") {
+            // ...aggiorna la sorgente dell'immagine dinamica
+            dynamicImage.src = imageSrc;
+            // ...e mostra l'overlay
+            imgOverlay.style.display = "flex";
+          } else {
+            // ...altrimenti (se l'attributo è assente o vuoto) nascondila!
+            imgOverlay.style.display = "none";
+          }
+        });
       });
-    });
 
-    // Chiudi quando clicchi sulla X
-    closeOverlay.addEventListener("click", () => {
-      imgOverlay.style.display = "none";
-    });
+      // Chiudi quando clicchi sulla X
+      closeOverlay.addEventListener("click", () => {
+        imgOverlay.style.display = "none";
+        // Opzionale: Resetta la sorgente dell'immagine quando l'overlay è chiuso
+        dynamicImage.src = "";
+      });
   </script>
 </body>
 
