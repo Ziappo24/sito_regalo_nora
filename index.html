@@ -143,22 +143,24 @@
 
     buttons.forEach((btn) => {
       btn.addEventListener("click", () => {
-        // 1. Imposta la sorgente audio e riproduci (vale per tutti)
+        // 1. Fai partire l'audio (questo vale per TUTTI i bottoni)
         const src = btn.getAttribute("data-audio");
         player.src = src;
         player.play();
 
-        // 2. LOGICA CONDIZIONALE:
-        // Se il bottone cliccato ha l'ID "playBtn", mostra l'immagine.
-        // Altrimenti assicurati che l'immagine sia nascosta.
+        // 2. CONTROLLO SPECIALE:
+        // Se l'ID del bottone cliccato è ESATTAMENTE "playBtn"...
         if (btn.id === "playBtn") {
+          // ...allora mostra l'immagine
           imgOverlay.style.display = "flex";
         } else {
+          // ...altrimenti (per tutti gli altri bottoni) nascondila!
           imgOverlay.style.display = "none";
         }
       });
     });
 
+    // Chiudi quando clicchi sulla X
     closeOverlay.addEventListener("click", () => {
       imgOverlay.style.display = "none";
     });
