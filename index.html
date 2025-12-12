@@ -1,153 +1,168 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Happy Birthday</title>
-    <style>
-      body {
-        margin: 0;
-        padding: 0;
-        font-family: Arial, sans-serif;
-        background: url("images/Bojack.png") center/cover no-repeat fixed;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        backdrop-filter: brightness(0.6);
-        color: white;
-      }
 
-      h1 {
-        margin-bottom: 20px;
-        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url("images/Bojack.png") center/cover no-repeat fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      backdrop-filter: brightness(0.6);
+      color: white;
+    }
 
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-        gap: 15px;
-        width: 90%;
-        max-width: 600px;
-      }
+    h1 {
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
 
-      button.audio-btn {
-        padding: 15px;
-        font-size: 1rem;
-        border: none;
-        background: rgba(255, 255, 255, 0.2);
-        color: white;
-        cursor: pointer;
-        border-radius: 10px;
-        transition: background 0.3s;
-      }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      width: 90%;
+      max-width: 600px;
+    }
 
-      button.audio-btn:hover {
-        background: rgba(255, 255, 255, 0.35);
-      }
+    button.audio-btn {
+      padding: 15px;
+      font-size: 1rem;
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
 
-      .player {
-        margin-top: 30px;
-        width: 90%;
-        max-width: 600px;
-      }
+    button.audio-btn:hover {
+      background: rgba(255, 255, 255, 0.35);
+    }
 
-      audio {
-        width: 100%;
-      }
-      /* Overlay immagine */
-#imgOverlay {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: rgba(0, 0, 0, 0.8);
-display: none;
-align-items: center;
-justify-content: center;
-z-index: 9999;
-}
-#imgOverlay img {
-max-width: 80%;
-max-height: 80%;
-border-radius: 12px;
-box-shadow: 0 0 20px rgba(255,255,255,0.3);
-}
-#closeOverlay {
-position: absolute;
-top: 30px;
-right: 30px;
-font-size: 26px;
-cursor: pointer;
-background: #ff4444;
-padding: 10px 18px;
-border-radius: 10px;
-}
+    .player {
+      margin-top: 30px;
+      width: 90%;
+      max-width: 600px;
+    }
 
-    </style>
-  </head>
-  <body>
-    <h1>🎉 Happy Birthday! 🎉</h1>
+    audio {
+      width: 100%;
+    }
 
-    <div class="grid">
-      <button class="audio-btn" data-audio="recordings/Back90.mp3">
-        INTRO-1 S1: "Back in the 90s"
-      <button class="audio-btn" data-audio="recordings/marina1.ogg">
-        EP-1 S1: "L'onestà di Marina"
-      </button>
-      <button class="audio-btn" data-audio="recordings/gaia.ogg">
-        EP-2 S1: "GAIA???"
-      </button>
-      <button class="audio-btn" data-audio="recordings/elisa.ogg">
-        EP-3 S1: "Non ti scordar di Elisa"
-      </button>
-      <button class="audio-btn" data-audio="recordings/come_va.mp3">
-        EP-4 S1: "Come va?"
-      </button>
-      <button class="audio-btn" data-audio="recordings/colazione.mp3">
-        EP-5 S1: "Quanto è importante la colazione?"
-      </button>
-      <button class="audio-btn" data-audio="recordings/edo.ogg">
-        EP-1 S2: "Edward mani di forbice"
-      </button>
-      <button class="audio-btn" data-audio="recordings/sergiu.ogg">
-        EP-2 S2: "Sergiuuuuu compagno di avventure"
-      </button>
-      <button class="audio-btn" id="playBtn" data-audio="recordings/audio.mp3">
-EP-3 S2: "Io clicco, e tu?"
-</button>
+    /* Overlay immagine */
+    #imgOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
 
+    #imgOverlay img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
 
-<!-- Overlay immagine -->
-<div id="imgOverlay">
-<div id="closeOverlay">CHIUDI ✖</div>
-<img src="images/img.png" alt="Immagine Episodio">
-</div>
+    #closeOverlay {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 26px;
+      cursor: pointer;
+      background: #ff4444;
+      padding: 10px 18px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🎉 Happy Birthday! 🎉</h1>
+
+  <div class="grid">
+    <button class="audio-btn" data-audio="recordings/Back90.mp3">
+      INTRO-1 S1: "Back in the 90s"
+    </button>
+    <button class="audio-btn" data-audio="recordings/marina1.ogg">
+      EP-1 S1: "L'onestà di Marina"
+    </button>
+    <button class="audio-btn" data-audio="recordings/gaia.ogg">
+      EP-2 S1: "GAIA???"
+    </button>
+    <button class="audio-btn" data-audio="recordings/elisa.ogg">
+      EP-3 S1: "Non ti scordar di Elisa"
+    </button>
+    <button class="audio-btn" data-audio="recordings/come_va.mp3">
+      EP-4 S1: "Come va?"
+    </button>
+    <button class="audio-btn" data-audio="recordings/colazione.mp3">
+      EP-5 S1: "Quanto è importante la colazione?"
+    </button>
+    <button class="audio-btn" data-audio="recordings/edo.ogg">
+      EP-1 S2: "Edward mani di forbice"
+    </button>
+    <button class="audio-btn" data-audio="recordings/sergiu.ogg">
+      EP-2 S2: "Sergiuuuuu compagno di avventure"
+    </button>
+
+    <button class="audio-btn" id="playBtn" data-audio="recordings/audio.mp3">
+      EP-3 S2: "Io clicco, e tu?"
+    </button>
+
+    <div id="imgOverlay">
+      <div id="closeOverlay">CHIUDI ✖</div>
+      <img src="images/img.png" alt="Immagine Episodio" />
     </div>
+  </div>
 
-    <div class="player">
-      <audio id="player" controls></audio>
-    </div>
+  <div class="player">
+    <audio id="player" controls></audio>
+  </div>
 
-    <script>
-      const buttons = document.querySelectorAll(".audio-btn");
-      const player = document.getElementById("player");
-      const imgOverlay = document.getElementById("imgOverlay");
-const closeOverlay = document.getElementById("closeOverlay");
+  <script>
+    const buttons = document.querySelectorAll(".audio-btn");
+    const player = document.getElementById("player");
+    const imgOverlay = document.getElementById("imgOverlay");
+    const closeOverlay = document.getElementById("closeOverlay");
 
-      buttons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const src = btn.getAttribute("data-audio");
-          player.src = src;
-          imgOverlay.style.display = "flex"; // Mostra immagine
-          player.play();
-        });
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        // 1. Imposta la sorgente audio e riproduci (vale per tutti)
+        const src = btn.getAttribute("data-audio");
+        player.src = src;
+        player.play();
+
+        // 2. LOGICA CONDIZIONALE:
+        // Se il bottone cliccato ha l'ID "playBtn", mostra l'immagine.
+        // Altrimenti assicurati che l'immagine sia nascosta.
+        if (btn.id === "playBtn") {
+          imgOverlay.style.display = "flex";
+        } else {
+          imgOverlay.style.display = "none";
+        }
       });
-      closeOverlay.addEventListener("click", () => {
-imgOverlay.style.display = "none";
-});
-    </script>
-  </body>
+    });
+
+    closeOverlay.addEventListener("click", () => {
+      imgOverlay.style.display = "none";
+    });
+  </script>
+</body>
+
 </html>
